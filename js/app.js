@@ -1,3 +1,50 @@
+// --- THEME TOGGLE LOGIC ---
+const themeToggleBtn = document.getElementById('theme-toggle');
+const currentTheme = localStorage.getItem('theme');
+
+// 1. Check memory on page load
+if (currentTheme === 'light') {
+    document.documentElement.setAttribute('data-theme', 'light');
+    themeToggleBtn.textContent = '🌙 Dark Mode';
+}
+
+// 2. Listen for clicks
+themeToggleBtn.addEventListener('click', () => {
+    let theme = document.documentElement.getAttribute('data-theme');
+    
+    if (theme === 'light') {
+        // Switch to Dark
+        document.documentElement.removeAttribute('data-theme');
+        localStorage.setItem('theme', 'dark');
+        themeToggleBtn.textContent = '☀️ Light Mode';
+    } else {
+        // Switch to Light
+        document.documentElement.setAttribute('data-theme', 'light');
+        localStorage.setItem('theme', 'light');
+        themeToggleBtn.textContent = '🌙 Dark Mode';
+    }
+});
+
+// --- SCROLL ANIMATIONS LOGIC ---
+const animatedSections = document.querySelectorAll('.hidden-section');
+
+const animationObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+            // Add the 'show' class to trigger the CSS transition
+            entry.target.classList.add('show-section');
+            // Stop observing once it has animated in
+            animationObserver.unobserve(entry.target); 
+        }
+    });
+}, {
+    threshold: 0.15 // Triggers when 15% of the section is visible on screen
+});
+
+animatedSections.forEach((section) => {
+    animationObserver.observe(section);
+});
+
 // --- 1. PROJECT DATA ---
 // In a full-stack app, this data would eventually come from your Java backend API.
 // For now, we mock the database using a local JavaScript array.

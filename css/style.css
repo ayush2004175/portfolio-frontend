@@ -1,11 +1,22 @@
-/* --- 1. CSS VARIABLES (Our Theme) --- */
+/* --- 1. CORE THEME VARIABLES --- */
 :root {
-    --bg-color: #0f172a;      /* Deep slate blue/black */
-    --text-main: #f8fafc;     /* Off-white for readability */
-    --text-muted: #94a3b8;    /* Grey for secondary text */
-    --accent-color: #38bdf8;  /* Vibrant blue for highlights */
-    --card-bg: #1e293b;       /* Slightly lighter slate for project cards */
-    --font-stack: 'Inter', system-ui, -apple-system, sans-serif;
+    /* Default Dark Mode */
+    --bg-color: #0f172a;
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+    --accent-color: #38bdf8;
+    --card-bg: #1e293b;
+    --border-color: #334155;
+}
+
+/* Light Mode Override */
+[data-theme="light"] {
+    --bg-color: #f8fafc;
+    --text-main: #0f172a;
+    --text-muted: #475569;
+    --accent-color: #0284c7;
+    --card-bg: #ffffff;
+    --border-color: #e2e8f0;
 }
 
 /* --- 2. GLOBAL RESET --- */
@@ -270,4 +281,16 @@ h1, h2, h3 {
 .project-content .btn {
     margin-top: auto; 
     align-self: flex-start;
+}
+
+/* --- SCROLL ANIMATIONS --- */
+.hidden-section {
+    opacity: 0;
+    transform: translateY(50px); /* Pushes it down slightly */
+    transition: all 0.8s ease-out; /* Smoothly animates over 0.8 seconds */
+}
+
+.show-section {
+    opacity: 1;
+    transform: translateY(0); /* Brings it back to its normal position */
 }
