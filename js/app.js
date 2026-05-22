@@ -93,7 +93,7 @@ contactForm.addEventListener('submit', async function(event) {
 
     try {
         // We are now sending data to YOUR local Java Spring Boot server
-        const response = await fetch('http://localhost:8080/api/contact', {
+        const response = await fetch('https://portfolio-backend-production-d0ee.up.railway.app/api/contact', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
