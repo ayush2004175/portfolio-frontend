@@ -1,27 +1,23 @@
-// --- THEME TOGGLE LOGIC ---
-const themeToggleBtn = document.getElementById('theme-toggle');
+// --- MODERN THEME TOGGLE LOGIC ---
+const themeToggleInput = document.getElementById('theme-toggle');
 const currentTheme = localStorage.getItem('theme');
 
 // 1. Check memory on page load
 if (currentTheme === 'light') {
     document.documentElement.setAttribute('data-theme', 'light');
-    themeToggleBtn.textContent = '🌙 Dark Mode';
+    themeToggleInput.checked = true; // Physically moves the slider to the right
 }
 
-// 2. Listen for clicks
-themeToggleBtn.addEventListener('click', () => {
-    let theme = document.documentElement.getAttribute('data-theme');
-    
-    if (theme === 'light') {
-        // Switch to Dark
-        document.documentElement.removeAttribute('data-theme');
-        localStorage.setItem('theme', 'dark');
-        themeToggleBtn.textContent = '☀️ Light Mode';
-    } else {
-        // Switch to Light
+// 2. Listen for the toggle switch changing
+themeToggleInput.addEventListener('change', () => {
+    if (themeToggleInput.checked) {
+        // Switch to Light Mode
         document.documentElement.setAttribute('data-theme', 'light');
         localStorage.setItem('theme', 'light');
-        themeToggleBtn.textContent = '🌙 Dark Mode';
+    } else {
+        // Switch to Dark Mode
+        document.documentElement.removeAttribute('data-theme');
+        localStorage.setItem('theme', 'dark');
     }
 });
 
